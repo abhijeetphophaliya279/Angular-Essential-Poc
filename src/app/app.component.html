@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand navbar-light bg-light">
+    <a class="navbar-brand nav-link" [routerLink]="['/welcome']">{{pageTitle}}</a>
+    <ul class="nav nav-pills">
+
+        <!-- <li class="nav-item">
+            <a class="nav-link " data-toggle="pill" [routerLink]="['/welcome']">Home</a></li> -->
+
+        <li class="nav-item">
+            <a class="nav-link " data-toggle="pill" [routerLink]="['/products']">Products</a></li>
+
+        <!-- <li class="nav-item">
+            <a class="nav-link " data-toggle="pill" [routerLink]="['/signup']">Sign Up</a></li> -->
+
+        <li class="nav-item">
+            <a class="nav-link " data-toggle="pill" [routerLink]="['/products/0/edit']">AddProduct</a></li>
+
+    </ul>
+</nav>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

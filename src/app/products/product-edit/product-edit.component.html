@@ -1,0 +1,144 @@
+<div class="card">
+    <div class="card-header">
+            {{pageTitle}}
+    </div>
+
+    <form novalidate (ngSubmit)="saveProduct()" [formGroup]="productForm">
+        <div class="card-body">
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="productNameId">Product Name</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="Product Name" id="productNameId" type="text"
+                        formControlName="productName"
+                        [ngClass]="{'is-invalid' : (productForm.get('productName').touched || productForm.get('productName').dirty) && !productForm.get('productName').valid}" />
+
+                    <span class="invalid-feedback">
+                        <span *ngIf="productForm.get('productName').errors?.required">
+                            Please enter your Product Name.
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="productCodeId">Product Code</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="Product Code" id="productCodeId" type="text"
+                        formControlName="productCode"
+                        [ngClass]="{'is-invalid' : (productForm.get('productCode').touched || productForm.get('productCode').dirty) && !productForm.get('productCode').valid}" />
+
+                    <span class="invalid-feedback">
+                        <span *ngIf="productForm.get('productCode').errors?.required">
+                            Please enter your Product Code.
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="starRatingId">Star Rating</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="Star Rating" id="starRatingId" type="number"
+                        formControlName="starRating"
+                        [ngClass]="{'is-invalid' : (productForm.get('starRating').touched || productForm.get('starRating').dirty) && !productForm.get('starRating').valid}" />
+
+                    <span class="invalid-feedback">
+                        <span *ngIf="productForm.get('starRating').errors?.required">
+                            Please enter your Star Rating.
+                        </span>
+                        <span
+                            *ngIf="productForm.get('starRating').errors?.min || productForm.get('starRating').errors?.max">
+                            Please enter your Star Rating between 1 to 5.
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+
+
+            <div formArrayName="tags">
+                    <div class="form-group row mb-2"
+                         *ngFor="let tag of tags.controls; let i=index">
+                      <label class="col-md-2 col-form-label"
+                             [attr.for]="i">Tag</label>
+            
+                      <div class="col-md-8">
+                        <input class="form-control"
+                               [id]="i"
+                               type="text"
+                               placeholder="Tag"
+                               [formControlName]="i" />
+                      </div>
+                      <button class="col-md-1 btn btn-outline-warning btn-sm"
+                              type="button"
+                              title="Delete this search tag"
+                              (click)="deleteTag(i)">Delete Tag
+                      </button>
+                    </div>
+                  </div>
+
+
+
+            <div class="form-group row mb-2">
+                <div class="col-md-4">
+                    <button class="btn btn-outline-primary" type="button" [disabled]="!tags.valid" (click)="addTag()">
+                        Add Tag
+                    </button>
+                </div>
+            </div>
+
+
+
+            
+            <div class="form-group row">
+                    <label class="col-md-2 col-form-label" for="descriptionId">description</label>
+                    <div class="col-md-8">
+                        <input class="form-control" placeholder="description" id="descriptionId" type="text"
+                            formControlName="description"
+                            [ngClass]="{'is-invalid' : (productForm.get('description').touched || productForm.get('description').dirty) && !productForm.get('description').valid}" />
+    
+                        <span class="invalid-feedback">
+                            <span *ngIf="productForm.get('description').errors?.required">
+                                Please enter your Star Rating.
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+
+                
+      <div class="form-group row mb-2">
+            <div class="offset-md-2 col-md-4">
+              <button class="btn btn-primary mr-3"
+                      style="width:80px;"
+                      type="submit"
+                      [title]="productForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                      [disabled]="!productForm.valid">
+                Save
+              </button>
+              <button class="btn btn-outline-secondary mr-3"
+                      style="width:80px;"
+                      type="button"
+                      title="Cancel your edits"
+                      [routerLink]="['/products']">
+                Cancel
+              </button>
+              <button class="btn btn-outline-warning"
+                      style="width:80px"
+                      type="button"
+                      title="Delete this product"
+                      (click)="deleteProduct()">
+                Delete
+              </button>
+            </div>
+          </div>
+
+        </div>
+    </form>
+</div>
+<br>Dirty: {{ productForm.dirty }}
+<br>Touched: {{ productForm.touched }}
+<br>Valid: {{ productForm.valid }}
+<br>Value: {{ productForm.value | json }}

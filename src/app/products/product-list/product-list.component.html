@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}} {{clickMessage}}
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">Filter By:</div>
+            <div class="col-md-9">
+                <input type="text" [(ngModel)]="listFilter">
+            </div>
+            <div class="col-md-1">
+                <button *ngIf='products && products.length' class="btn btn-primary" (click)="clearFilter()">
+                    Clear
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Filter By: {{listFilter}} </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table" *ngIf='products && products.length'>
+            <thead>
+                <tr>
+                    <th>
+                        <button class="btn btn-primary" (click)="toggleImage()">
+                            {{showImage ? 'Hide' : 'Show'}} Image
+                        </button>
+                    </th>
+                    <th>
+                        Product
+                    </th>
+                    <th>Code</th>
+                    <th>Realease Date</th>
+                    <th>Available</th>
+                    <th>Price</th>
+                    <th>5 Start Rating</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let product of filteredProducts">
+                    <td><img *ngIf='showImage' [src]='product.imageUrl' [title]='product.productName'
+                            [style.width.px]='imageWidth' [style.height.px]='imageHeight' /></td>
+                    <td><a [routerLink]="['/products', product.id]">{{product.productName | uppercase}}</a></td>
+                    <td>{{product.productCode | lowercase | ConverToSpaces:'-'  }}</td>
+                    <td>{{product.releaseDate}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.price | currency:'USD': 'symbol':'1.2-2'}}</td>
+                    <td>
+                        <pm-star (notify)='onNotify($event)' [rating]='product.starRating'></pm-star>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary btn-sm" [routerLink]="['/products' , product.id , 'edit']" type="button">
+                            Edit
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

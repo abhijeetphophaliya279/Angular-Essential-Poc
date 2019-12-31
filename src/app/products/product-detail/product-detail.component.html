@@ -1,0 +1,67 @@
+<div class="card">
+    <div class="card-header">
+            {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">Product Name</div>
+                        <div class="col-md-6">{{product.productName}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Product Code</div>
+                        <div class="col-md-6">{{product.productCode}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Release Date</div>
+                        <div class="col-md-6">{{product.releaseDate}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Description</div>
+                        <div class="col-md-6">{{product.description}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Price</div>
+                        <div class="col-md-6">{{product.price}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Star Rating</div>
+                        <div class="col-md-6">
+                            <pm-star [rating]='product.starRating'></pm-star>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <img [src]='product.imageUrl' [title]='product.productName' [style.width.px]='imageWidth'
+                    [style.height.px]='imageHeight' />
+            </div>
+        </div>
+
+
+    </div>
+    <div class="card-header ">
+
+
+        <div class="form-group row mb-6">
+            <div class="offset-md-1">
+                <button class="btn btn-primary" (click)="onBack()">
+                    Back
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-outline-primary"
+                    [routerLink]="['/products' , product.id , 'edit']" type="button">
+                    Edit
+                </button>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
